@@ -4,12 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Repository;
 
 import com.google.common.base.Optional;
 
@@ -17,6 +20,7 @@ import br.com.senai.manutencaosenaiapi.entity.Cliente;
 import br.com.senai.manutencaosenaiapi.entity.OrdemDeServico;
 import br.com.senai.manutencaosenaiapi.entity.Peca;
 import br.com.senai.manutencaosenaiapi.entity.Tecnico;
+import br.com.senai.manutencaosenaiapi.enums.Sexo;
 import br.com.senai.manutencaosenaiapi.repository.PecasRepository;
 import br.com.senai.manutencaosenaiapi.service.ClienteService;
 import br.com.senai.manutencaosenaiapi.service.OrdemDeServicoService;
@@ -31,7 +35,7 @@ public class InitApp {
 	}
 
 	@Autowired
-	private TecnicoService service;
+	private TecnicoService tecnicoService;
 
 	@Autowired
 	private ClienteService clienteService;
@@ -42,33 +46,33 @@ public class InitApp {
 	@Autowired
 	private OrdemDeServicoService ordemService;
 
-	@Autowired
-	private PecasRepository pecasRepository;
-
+	@Transactional
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ac) {
 		return args -> {
 			try {
-				/*Peca novaPeca = new Peca();
-				novaPeca.setDescricao("Placa Mãe Gigabit");
-				novaPeca.setEspecificacoes("Placa da mãe");
-				novaPeca.setQtdeEmEstoque(10);
-				Peca pecaSalva = pecasRepository.save(novaPeca);
-				System.out.println("Id da peça: " + pecaSalva.getId());*/
-				
-				java.util.Optional<Peca> pecaEncontrada = pecasRepository.findById(7);
-				pecaEncontrada.get().setEspecificacoes("Uma porcaria");
-				Peca pecaAlterada =pecasRepository.save(pecaEncontrada.get());
-				System.out.println(pecaAlterada);
-				if(pecaEncontrada.isPresent()) {
-					System.out.println("Peça encontrada: " + pecaEncontrada.get());
-				}
-				System.out.println("Peça encontrada: " + pecaEncontrada);
+				Cliente novoCliente = new Cliente();
+				novoCliente.setNome("Jhonny");
+				novoCliente.setDataDeNascimento(LocalDate.of(1973, 3, 15));
+				novoCliente.setSobrenome("Depp");
+				novoCliente.setCpf("005.900.289-10");
+				novoCliente.setSexo(Sexo.M);
+				novoCliente.setEndereco("Rua josé das couves");
+				this.clienteService.inserir(novoCliente);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 
 		};
+	}
+
+	@Transactional
+	public void remover() {
+		this.tecnicosRepository.dele
+	}
+
+	public Tecnico buscarPor(Integer id) {
+		return repository.findById(id).get();
 	}
 
 }
