@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.google.common.base.Optional;
 
+import antlr.NoViableAltException;
 import br.com.senai.manutencaosenaiapi.entity.Cliente;
 import br.com.senai.manutencaosenaiapi.entity.OrdemDeServico;
 import br.com.senai.manutencaosenaiapi.entity.Peca;
@@ -51,28 +52,45 @@ public class InitApp {
 	public CommandLineRunner commandLineRunner(ApplicationContext ac) {
 		return args -> {
 			try {
-				Cliente novoCliente = new Cliente();
-				novoCliente.setNome("Jhonny");
-				novoCliente.setDataDeNascimento(LocalDate.of(1973, 3, 15));
-				novoCliente.setSobrenome("Depp");
-				novoCliente.setCpf("005.900.289-10");
-				novoCliente.setSexo(Sexo.M);
-				novoCliente.setEndereco("Rua josé das couves");
-				this.clienteService.inserir(novoCliente);
+				/*List<Cliente> clientes = clienteService.listarPor("j");
+				Cliente clienteSelecionado = clientes.get(0);
+
+				List<Tecnico> tecnicos = tecnicoService.listarPor("b");
+				Tecnico tecnicoSelecionado = tecnicos.get(0);
+
+				List<Peca> pecas = pecaService.listarPor("p");
+				List<Peca> pecasDoReparo = new ArrayList<>();
+				pecasDoReparo.add(pecas.get(0));
+				pecasDoReparo.add(pecas.get(1));
+
+				OrdemDeServico novaOrdem = new OrdemDeServico();
+				novaOrdem.setCliente(clienteSelecionado);
+				novaOrdem.setTecnico(tecnicoSelecionado);
+				novaOrdem.setDataDeAbertura(LocalDate.of(2022, 5, 6));
+				novaOrdem.setDescricaoDoProblema("Micro não liga");
+				novaOrdem.setPecasDoReparo(pecasDoReparo);
+
+				ordemService.inserir(novaOrdem);
+				
+				this.ordemService.inserir(novaOrdem);*/
+
+				/*List<Cliente> clientes = clienteService.listarPor("j");
+				OrdemDeServico ordemSalva = ordemService.buscarPor(6);
+				ordemSalva.setCliente(clientes.get(2));
+				ordemService.alterar(ordemSalva);
+				System.out.println(ordemSalva);*/
+				
+				OrdemDeServico ordemSalva = ordemService.buscarPor(6);
+				ordemSalva.getPecasDoReparo().add(ordemSalva.getPecasDoReparo().get(0));
+				ordemSalva.setDescricaoDoReparo("Poeira");
+				ordemSalva.setDataDeEncerramento(LocalDate.of(2022, 5, 6));
+				this.ordemService.fechar(ordemSalva);
+				
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
 
 		};
-	}
-
-	@Transactional
-	public void remover() {
-		this.tecnicosRepository.dele
-	}
-
-	public Tecnico buscarPor(Integer id) {
-		return repository.findById(id).get();
 	}
 
 }

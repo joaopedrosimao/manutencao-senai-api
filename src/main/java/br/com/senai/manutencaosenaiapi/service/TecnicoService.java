@@ -49,4 +49,8 @@ public class TecnicoService {
 			@NotNull(message = "O id de exclusão não pode ser nulo") @Min(value = 1, message = "O id deve ser maior que zero") Integer id) {
 		this.repository.deletarPor(id);
 	}
+
+	public Tecnico buscarPor(Integer id) {
+		return repository.findById(id).get();
+	}
 }

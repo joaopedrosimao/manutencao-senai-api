@@ -41,7 +41,7 @@ public class ClienteService {
 
 	public List<Cliente> listarPor(
 			@NotEmpty(message = "O nome para busca é obrigatório") @NotBlank(message = "O nome para busca não deve conter espaço em branco") String nome) {
-		return repository.listarPor(nome);
+		return repository.listarPor("%" + nome + "%");
 	}
 
 	public void removerPor(

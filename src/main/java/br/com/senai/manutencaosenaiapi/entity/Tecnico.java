@@ -39,7 +39,7 @@ public class Tecnico {
 	@Setter
 	private String nomeCompleto;
 
-	@Column(name = "dt_adimissao")
+	@Column(name = "dt_admissao")
 	@NotNull(message = "A data de admissão não pode ser nula")
 	@PastOrPresent(message = "A data de admissão não pode ser posterior a data atual")
 	@Getter
