@@ -133,6 +133,7 @@ public class TelaConsultaDePeca extends JFrame {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Texte");
 				int linhaSelecionada = table.getSelectedRow();
 				PecaTableModel model = (PecaTableModel) table.getModel();
 				Peca pecaSalva = model.getPor(linhaSelecionada);
