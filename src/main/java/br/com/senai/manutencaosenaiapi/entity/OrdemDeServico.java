@@ -22,7 +22,7 @@ import javax.validation.constraints.PastOrPresent;
 import lombok.Data;
 
 @Data
-@Entity(name = "OredemDeServico")
+@Entity(name = "OrdemDeServico")
 @Table(name = "ordens_servicos")
 public class OrdemDeServico {
 
