@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import br.com.senai.manutencaosenaiapi.view.TelaLogin;
-
+ 
 @SpringBootApplication
 public class InitApp {
 
@@ -30,7 +30,7 @@ public class InitApp {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							telaDeLogin.setVisible(true);   
+							telaDeLogin.setVisible(true);    
 
 						} catch (Exception e) {
 							e.printStackTrace();
